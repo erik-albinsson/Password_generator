@@ -25,7 +25,9 @@ export function passwordStrengthCalculator(passwordLength, passwordOptions) {
     //A simplified operation that illustrates the relationship between number of combinations
     const passwordValue = passwordLength**2 * avaiableChar.length;
     
-     if (passwordValue < 1500) {
+    if (passwordValue === 0){
+        strength = 0;
+    } else if (passwordValue < 1500) {
         strength = 1;
     } else if (passwordValue < 3500) {
         strength = 2;

@@ -1,39 +1,249 @@
- .App {
-  margin-left: auto;
-  margin-right: auto;
+@font-face {
+  font-family: "JetBrains_mono_bold"; /*a name to be used later*/
+  src: url('assets/fonts/static/JetBrainsMono-Bold.ttf'); /*URL to font*/
 }
 
-.Pwd_gen_container{
-  background-color: rgb(99, 147, 192);
-  height: 632px;
-  width: 540px;
+/* Saved variables */
+:root {
+  --very-dark-grey: #18171F;
+  --dark-grey: #24232C;
+  --almost-white: #E6E5EA;
+  --grey: #817D92;
+  --neon-green: #A4FFAF;
+  --yellow: #F8CD65;
+  --orange: #FB7C58;
+  --red: #F64A4A;
+  --heading-l-font-size: 32px;
+  --heading-m-font-size: 24px;
+  --body-font-size: 18px;
+  --strength-meter-width: 10px;
+  --strength-meter-height: 28px;
 }
 
+/* Screen size adjustments */
+@media screen and (max-width: 540px) {
+:root{
+  --heading-l-font-size: 5.93vw;
+  --heading-m-font-size: 4.44vw;
+  --body-font-size: 3.33vw;
+  --strength-meter-width:1.85vw; 
+  --strength-meter-height: 5.18vw;
+}}
 
-
-/*
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* General settings for whole site */
+html {
+  background-color: var(--very-dark-grey);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App {
   display: flex;
+  align-items: center;
   flex-direction: column;
+}
+
+.pwd-gen-container{
+  height: auto;
+  width: 90%;
+  max-width: 540px;
+  
+}
+
+.pwd-gen-container > div{
+  padding: 0 3%;
+  background-color: var(--dark-grey);
+}
+/* Typography */
+.heading-large{
+  font-family: "JetBrains_mono_bold";
+  color: var(--almost-white);
+  font-size: var(--heading-l-font-size);
+  margin: 0.5em 0;
+}
+
+.heading-medium{
+  font-family: "JetBrains_mono_bold";
+  color: var(--almost-white);
+  font-size: var(--heading-m-font-size);
+}
+
+.body-medium{
+  font-family: "JetBrains_mono_bold";
+  color: var(--almost-white);
+  font-size: var(--body-font-size);
+}
+
+/* Styling for component PasswordClipboard */
+.password-display{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy-respons{
+  margin-left: auto;
+  margin-right: 3%;
+  color: var(--neon-green);
+}
+.password-display img{
+  cursor: pointer;
+  height: 1.5em;
+  width: 1.3125em;
+}
+
+.password-display img:hover{
+  filter: brightness(0) saturate(100%) invert(99%) sepia(18%) saturate(1178%) hue-rotate(222deg) brightness(111%) contrast(100%);
+}
+
+/* Styling for component PasswordLengthSlider */
+.password-length-display{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.password-length-slider{
+  background-color: var(--dark-grey);
+  margin: 5% 0;
+}
+
+.slider-length{
+  width: 100%;
+  accent-color: var(--neon-green);
+} 
+
+/* Styling for creation of custom checkbox in component PasswordGeneratorOptions*/
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 9%;
+  margin-bottom: 6%; 
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.25em;
+  width: 1.25em;
+  background-color: var(--dark-grey);
+  outline: 0.125em solid var(--almost-white);
+}
+
+/* On hover add green outline */
+.checkbox-container:hover input ~ .checkmark {
+  outline: 0.125em solid var(--neon-green);
+
+}
+
+/* When checked, make box green */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--neon-green);
+  outline: 0.125em solid var(--neon-green);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style for checkmark */
+.checkbox-container .checkmark:after {
+  left: 0.44em;
+  top: 0.187em;
+  width: 0.25em;
+  height: 0.625em;
+  border: solid var(--dark-grey);
+  border-width: 0 0.1875em 0.1875em 0;
+  transform: rotate(45deg);
+  display:inline-block;
+}
+
+/* Styling for component PasswordStrengthDisplay */
+.password-strength-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--very-dark-grey);
+  padding: 0 5%;
+}
+
+.password-strength-display p{
+  margin: 0.3125em;
+}
+
+.strenght-meter{
+  width: var(--strength-meter-width); 
+  height: var(--strength-meter-height); 
+  outline: 0.125em solid var(--almost-white);
+}
+
+/* Colors for diffrent strenght */
+.too-weak{
+  background-color: var(--red);
+  outline-color: var(--red);
+}
+
+.weak{
+  background-color: var(--orange);
+  outline-color: var(--orange);
+}
+
+.medium{
+  background-color: var(--yellow);
+  outline-color: var(--yellow);
+}
+
+.strong{
+  background-color: var(--neon-green);
+  outline-color: var(--neon-green);
+}
+
+/* Style for generate password button */
+.div-generate-pwd{
+  padding: 5% 0;
+}
+
+.btn-generate-pwd{
+  width: 100%;
+  background-color: var(--neon-green);
+  border: 0.125em solid var(--neon-green);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-} */
+.btn-generate-pwd p {
+  margin-right: 1.5em;
+  color: var(--dark-grey);
+}
+
+.btn-generate-pwd:hover{
+  background-color: var(--dark-grey);
+}
+
+.btn-generate-pwd:hover p{
+  color: var(--neon-green)!important;
+}
+
+.btn-generate-pwd:hover img{
+  filter: brightness(0) saturate(100%) invert(91%) sepia(60%) saturate(382%) hue-rotate(53deg) brightness(99%) contrast(108%);
+}

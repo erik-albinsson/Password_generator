@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { PasswordClipboard } from "./PasswordClipboard";
+import { PasswordLengthSlider } from "./PasswordLengthSlider"
 import { PasswordGeneratorOptions } from "./PasswordGeneratorOptions";
 import { generatePassword } from "../helpers/GeneratePassword";
 import { passwordStrengthCalculator } from "../helpers/PasswordStrengthCalculator";
 import { PasswordStrengthDisplay } from "./PasswordStrengthDisplay";
+import Arrow from "../assets/images/icon-arrow-right.svg"
 
 export function PasswordGenerator()  {
 
@@ -26,6 +28,8 @@ export function PasswordGenerator()  {
     }
 
     const handlePassword = (passwordLength, passwordOptions) => {
+        //New password removes previous copy-respons
+        document.getElementById("copy-respons").textContent = ""
         setPassword(generatePassword(passwordLength, passwordOptions));
     }
 
@@ -34,13 +38,19 @@ export function PasswordGenerator()  {
     }, [passwordLength, passwordOptions])
 
     return (
-       <div className="Pwd_gen_container">
+       <div className="pwd-gen-container">
         <PasswordClipboard password={password}/>
-        <PasswordGeneratorOptions passwordLength={passwordLength} handleLength={handleLength} handleOptions={handleOptions} />
-        <PasswordStrengthDisplay passwordStrength={passwordStrength}/>
-
-        <button onClick={() => handlePassword(passwordLength, passwordOptions)}>Generate</button>
-
+        <div>
+            <PasswordLengthSlider  passwordLength={passwordLength} handleLength={handleLength} />
+            <PasswordGeneratorOptions handleOptions={handleOptions} />
+            <PasswordStrengthDisplay passwordStrength={passwordStrength}/>
+            <div className="div-generate-pwd">
+                <button className="btn-generate-pwd" onClick={() => handlePassword(passwordLength, passwordOptions)}>
+                    <p className="body-medium" >Generate</p>  
+                    <img src={Arrow} alt="Arrow right" />
+                </button>
+            </div>
+        </div>
        </div>
     );
 }

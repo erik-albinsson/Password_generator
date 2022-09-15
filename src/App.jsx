@@ -5,7 +5,7 @@ import { PasswordGenerator } from "./components/PasswordGenerator"
 function App() {
   return (
     <div className="App">
-      <p>Password Generator</p>
+      <p className="heading-medium" style={{color: "var(--grey)"}}>Password Generator</p>
       <PasswordGenerator/>
     </div>
   );
