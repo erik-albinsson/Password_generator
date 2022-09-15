@@ -102,13 +102,13 @@ html {
 }
 
 .password-length-slider{
-  background-color: var(--dark-grey);
   margin: 5% 0;
 }
 
 .slider-length{
   width: 100%;
   accent-color: var(--neon-green);
+  cursor: pointer;
 } 
 
 /* Styling for creation of custom checkbox in component PasswordGeneratorOptions*/
