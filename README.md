@@ -1,4 +1,4 @@
-A WIP program for randomly generating a password based on preferences made by the user.
+A program for randomly generating a password based on preferences made by the user.
 
 This program is made with React with the use of hooks to manage state. This allows the code to be separated into smaller more comprehensible pieces, improving readability. It also makes it more open for change and reusability since each piece can be made to work independently or with different purposes. 
 
@@ -18,3 +18,7 @@ The program also offers an evaluation of how secure the password is. Since this 
     passwordLength**2 * avaiableChar.length
 
 This calculation roughly display the relation between objects and samples and gives a good indication on the security of the password.
+
+The Program offers a great deal of functions designed to improve user friendliness, such as instant feedback, hover effects and simple UI. Although improvments can always be made. When there is nothing to copy, the button should not light up whilst hovering, the error message could be red. The Generate password button could also offer some assistance perhaps a message whilst trying to generate a password with invalid data, or simply not being clickable. However this is outside of the scope for this assignment at this particular time.
+
+To run this program you should be able to simply download it and run the command "npm start" at the root of the program.
